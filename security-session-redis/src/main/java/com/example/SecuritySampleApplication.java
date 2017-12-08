@@ -27,7 +27,7 @@ public class SecuritySampleApplication {
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		// 明示的に色々消しても、ちゃんとログアウトできていない…(;;)
 		
-		System.out.println("*** lohout!");
+		System.out.println("*** loghout!");
 		HttpSession session = request.getSession();
 		session.invalidate();
 		SecurityContextHolder.clearContext();

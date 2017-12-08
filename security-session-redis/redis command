@@ -1,0 +1,8 @@
+1.redisの起動
+ redis-server &
+2.redisの動作確認
+　ps ax | grep redis
+3.redisの内容確認
+　redis-cli keys "*"
+4.redisの停止
+　redis-cli shutdown

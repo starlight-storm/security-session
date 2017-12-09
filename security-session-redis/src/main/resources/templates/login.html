@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
   <meta charset="UTF-8"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
+  <meta name="_csrf" content="${_csrf.token}"/>
 </head>
 <body>
 <h1>ログインページ</h1>

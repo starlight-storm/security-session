@@ -15,7 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+
+import com.example.handler.AppLogoutSuccessHandler;
+import com.example.handler.DoubleLoginAuthenticationFailureHandler;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -35,19 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login.html")
 				.loginProcessingUrl("/processLogin")
 				.defaultSuccessUrl("/top.html")
-				.failureUrl("/login.html")
+				//.failureUrl("/login.html")
+				.failureHandler(new DoubleLoginAuthenticationFailureHandler())
 				.usernameParameter("paramLoginId")
 				.passwordParameter("paramPassword")
 				.and()
 			.logout()
 				.logoutUrl("/logout")
+				.logoutSuccessHandler(appLogoutSuccessHandler())
 				.logoutSuccessUrl("/logout.html")
-				.deleteCookies("JSESSIONID")
 				.clearAuthentication(true)
 				.invalidateHttpSession(true)
 				.and()
 			.exceptionHandling()
-			    .accessDeniedPage("/error")
+			    .accessDeniedPage("/accessDenied.html")
 			    .and()
 			// disable()を外すと、今回のサンプルは大変なのでつけておく
 			.csrf().disable()
@@ -67,6 +72,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
     public static ServletListenerRegistrationBean httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    }
+    
+    @Bean
+    protected LogoutSuccessHandler appLogoutSuccessHandler() {
+        return new AppLogoutSuccessHandler();
     }
     
     @Autowired

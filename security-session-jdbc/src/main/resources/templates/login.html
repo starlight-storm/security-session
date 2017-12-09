@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}" />
+</head>
+<body>
+	<h1>ログインページ</h1>
+	<form action="/processLogin" method="post">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+		<dl>
+			<dt>ログインID</dt>
+			<dd>
+				<input type="text" name="paramLoginId" />
+			</dd>
+			<dt>パスワード</dt>
+			<dd>
+				<input type="password" name="paramPassword" />
+			</dd>
+		</dl>
+		<button>ログイン</button>
+	</form>
+</body>
+</html>

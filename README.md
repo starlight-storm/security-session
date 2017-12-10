@@ -1,8 +1,6 @@
-# security-session-redis
+# security-session
 目的：  
-Spring Security, Spring Session, redisを検証する。  
-
-というつもりだったけど、JDBC(H2)も追加してしまった。ので今となってはタイトルは間違っている(^^;)  
+Spring Security, Spring SessionとストレージであるredisとH２を検証する。 
 
 検証内容：  
 ・セッションをredisもしくはH2に格納する。  
